@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  border: 1px solid black;
+  margin: 10px auto;
+  width: 360px;
+  height: 570px;
+}
+
+.App .monitor {
+  color: white;
+  background: #1c191c;
+  height: 130px;
+  font-size: 6em;
+  text-align: right;
+}
+
+.App .container-btn .btn {
+  width: 88px;
+  height: 86px;
+  border: 1px solid #D9D9D9;
+  font-size: 2em;
+}
+
+.App .container-btn .btn.btn-0 {
+  width: 178px;
+}
+
+.App .container-btn table {
+  border-spacing: 0px;
+}
