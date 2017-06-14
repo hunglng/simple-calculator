@@ -54,9 +54,11 @@ class App extends Component {
       case "8":
       case "9":
         this.handleNumber(parseInt(key, 10));
+        this.saveState();
         break;
       case ".":
         this.handleDot();
+        this.saveState();
         break;
       case "DEL":
         this.handleDel();
@@ -66,19 +68,38 @@ class App extends Component {
         break;
       case "+/-":
         this.handlePlusMinus();
+        this.saveState()
         break;
       case "+":
       case "-":
       case "*":
       case "/":
         this.handleOperator(key);
+        this.saveState()
         break;
       case "=":
         this.handleOperator(null);
+        this.saveState()
         break;
       default:
         break;
     }
+  }
+
+  saveState() {
+    let state = this.state.previousState;
+    state.push({
+      firstNumber: this.state.firstNumber,
+      secondNumber: this.state.secondNumber,
+      operator: this.state.operator,
+      displayValue: this.state.displayValue,
+      isFirst: this.state.isFirst,
+      isDot: this.state.isDot,
+      numberAfterDot: this.state.numberAfterDot,
+    });
+    this.setState({
+      previousState: state
+    });
   }
 
   handlePlusMinus() {
@@ -101,7 +122,20 @@ class App extends Component {
   }
 
   handleDel() {
-    
+    let previousState = this.state.previousState;
+    if (previousState.length > 0) {
+      let state = previousState.pop();
+      this.setState({
+        firstNumber: state.firstNumber,
+        secondNumber: state.secondNumber,
+        operator: state.operator,
+        displayValue: state.displayValue,
+        isFirst: state.isFirst,
+        isDot: state.isDot,
+        numberAfterDot: state.numberAfterDot,
+        previousState: previousState
+      });
+    }
   }
 
   resetValue() {
@@ -208,7 +242,8 @@ class App extends Component {
       operator: operator,
       numberAfterDot: 1,
       isDot: false,
-      displayValue: displayValue
+      displayValue: displayValue,
+      previousState: []
     });
   }
 
