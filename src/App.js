@@ -174,25 +174,26 @@ class App extends Component {
       displayValue,
       numberAfterDot = this.state.numberAfterDot;
     if (this.state.isFirst) {
+      if (!isFinite(firstNumber)) firstNumber = 0;
       let rate = (this.state.firstNumber / Math.abs(this.state.firstNumber));
       rate = isNaN(rate) ? 1 : rate;
       if (this.state.isDot) {
-        firstNumber = this.state.firstNumber + number / Math.pow(10, this.state.numberAfterDot) * rate;
+        firstNumber = firstNumber + number / Math.pow(10, this.state.numberAfterDot) * rate;
         displayValue = firstNumber.toFixed(numberAfterDot);
         numberAfterDot = this.state.numberAfterDot + 1;
       } else {
-        firstNumber = this.state.firstNumber * 10 + number * rate;
+        firstNumber = firstNumber * 10 + number * rate;
         displayValue = firstNumber;
       }
     } else {
       let rate = (this.state.secondNumber / Math.abs(this.state.secondNumber));
       rate = isNaN(rate) ? 1 : rate;
       if (this.state.isDot) {
-        secondNumber = this.state.secondNumber + number / Math.pow(10, this.state.numberAfterDot) * rate;
+        secondNumber = secondNumber + number / Math.pow(10, this.state.numberAfterDot) * rate;
         displayValue = firstNumber + this.state.operator + secondNumber.toFixed(numberAfterDot);
         numberAfterDot = this.state.numberAfterDot + 1;
       } else {
-        secondNumber = this.state.secondNumber * 10 + number * rate;
+        secondNumber = secondNumber * 10 + number * rate;
         displayValue = firstNumber + this.state.operator + secondNumber;
       }
     }
